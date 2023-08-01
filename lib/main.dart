@@ -1,8 +1,9 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -46,12 +47,13 @@ class MyApp extends StatelessWidget {
       // Deshabilitar la cuadrícula de Material
       showPerformanceOverlay: false,
       // Deshabilitar el rendimiento de la superposición
-      initialRoute: '/first',
+      initialRoute: '/landing',
       routes: {
         '/first': (context) => FirstScreen(),
         '/second': (context) => SecondScreen(),
         '/third': (context) => ThirdScreen(),
         '/fourth': (context) => FourthScreen(),
+        '/landing': (context) => LandingScreen(),
       },
       navigatorKey: null,
     );
@@ -59,7 +61,8 @@ class MyApp extends StatelessWidget {
 
 
 }
-class FirstScreen extends StatelessWidget{
+
+class FirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +85,7 @@ class FirstScreen extends StatelessWidget{
                     highlightColor: Colors.cyan,
                     icon: Icon(Icons.home, size: 30, color: Colors.white),
                     onPressed: () {
-1;
+                      1;
                     },
                   ),
                   IconButton(
@@ -90,7 +93,8 @@ class FirstScreen extends StatelessWidget{
                     icon: Icon(Icons.location_searching_rounded,
                         size: 30, color: Colors.white),
                     onPressed: () {
-                      Navigator.pushNamed(context, '/second'); // Navega a la Segunda Pantalla
+                      Navigator.pushNamed(
+                          context, '/second'); // Navega a la Segunda Pantalla
                     },
                   ),
                   Container(
@@ -111,14 +115,16 @@ class FirstScreen extends StatelessWidget{
                     highlightColor: Colors.green,
                     icon: Icon(Icons.person, size: 30, color: Colors.white),
                     onPressed: () {
-                      Navigator.pushNamed(context, '/third'); // Navega a la Segunda Pantalla
+                      Navigator.pushNamed(
+                          context, '/third'); // Navega a la Segunda Pantalla
                     },
                   ),
                   IconButton(
                     highlightColor: Colors.orange,
                     icon: Icon(Icons.settings, size: 30, color: Colors.white),
                     onPressed: () {
-                      Navigator.pushNamed(context, '/fourth'); // Navega a la Segunda Pantalla
+                      Navigator.pushNamed(
+                          context, '/fourth'); // Navega a la Segunda Pantalla
                     },
                   ),
                 ],
@@ -457,6 +463,7 @@ class FirstScreen extends StatelessWidget{
   }
 
 }
+
 class SecondScreen extends StatelessWidget {
 
   @override
@@ -481,7 +488,8 @@ class SecondScreen extends StatelessWidget {
                       highlightColor: Colors.cyan,
                       icon: Icon(Icons.home, size: 30, color: Colors.white),
                       onPressed: () {
-                        Navigator.popAndPushNamed(context, '/first'); // Navega a la Segunda Pantalla
+                        Navigator.popAndPushNamed(
+                            context, '/first'); // Navega a la Segunda Pantalla
                       },
                     ),
                     IconButton(
@@ -489,7 +497,7 @@ class SecondScreen extends StatelessWidget {
                       icon: Icon(Icons.location_searching_rounded,
                           size: 30, color: Colors.white),
                       onPressed: () {
-1;
+                        1;
                       },
                     ),
                     Container(
@@ -510,7 +518,8 @@ class SecondScreen extends StatelessWidget {
                       highlightColor: Colors.green,
                       icon: Icon(Icons.person, size: 30, color: Colors.white),
                       onPressed: () {
-                        Navigator.popAndPushNamed(context, '/third'); // Navega a la Segunda Pantalla
+                        Navigator.popAndPushNamed(
+                            context, '/third'); // Navega a la Segunda Pantalla
 
                       },
                     ),
@@ -518,7 +527,8 @@ class SecondScreen extends StatelessWidget {
                       highlightColor: Colors.orange,
                       icon: Icon(Icons.settings, size: 30, color: Colors.white),
                       onPressed: () {
-                        Navigator.popAndPushNamed(context, '/fourth'); // Navega a la Segunda Pantalla
+                        Navigator.popAndPushNamed(
+                            context, '/fourth'); // Navega a la Segunda Pantalla
 
                       },
                     ),
@@ -565,9 +575,9 @@ class SecondScreen extends StatelessWidget {
             ),
           ),
         ));
-
   }
 }
+
 class ThirdScreen extends StatelessWidget {
 
   @override
@@ -592,7 +602,8 @@ class ThirdScreen extends StatelessWidget {
                       highlightColor: Colors.cyan,
                       icon: Icon(Icons.home, size: 30, color: Colors.white),
                       onPressed: () {
-                        Navigator.popAndPushNamed(context, '/first'); // Navega a la Segunda Pantalla
+                        Navigator.popAndPushNamed(
+                            context, '/first'); // Navega a la Segunda Pantalla
                       },
                     ),
                     IconButton(
@@ -600,7 +611,8 @@ class ThirdScreen extends StatelessWidget {
                       icon: Icon(Icons.location_searching_rounded,
                           size: 30, color: Colors.white),
                       onPressed: () {
-                        Navigator.popAndPushNamed(context, '/second'); // Navega a la Segunda Pantalla
+                        Navigator.popAndPushNamed(
+                            context, '/second'); // Navega a la Segunda Pantalla
 
                       },
                     ),
@@ -629,7 +641,8 @@ class ThirdScreen extends StatelessWidget {
                       highlightColor: Colors.orange,
                       icon: Icon(Icons.settings, size: 30, color: Colors.white),
                       onPressed: () {
-                        Navigator.popAndPushNamed(context, '/fourth'); // Navega a la Segunda Pantalla
+                        Navigator.popAndPushNamed(
+                            context, '/fourth'); // Navega a la Segunda Pantalla
 
                       },
                     ),
@@ -676,9 +689,9 @@ class ThirdScreen extends StatelessWidget {
             ),
           ),
         ));
-
   }
 }
+
 class FourthScreen extends StatelessWidget {
 
   @override
@@ -703,7 +716,8 @@ class FourthScreen extends StatelessWidget {
                       highlightColor: Colors.cyan,
                       icon: Icon(Icons.home, size: 30, color: Colors.white),
                       onPressed: () {
-                        Navigator.popAndPushNamed(context, '/first'); // Navega a la Segunda Pantalla
+                        Navigator.popAndPushNamed(
+                            context, '/first'); // Navega a la Segunda Pantalla
                       },
                     ),
                     IconButton(
@@ -711,7 +725,8 @@ class FourthScreen extends StatelessWidget {
                       icon: Icon(Icons.location_searching_rounded,
                           size: 30, color: Colors.white),
                       onPressed: () {
-                        Navigator.popAndPushNamed(context, '/second'); // Navega a la Segunda Pantalla
+                        Navigator.popAndPushNamed(
+                            context, '/second'); // Navega a la Segunda Pantalla
                       },
                     ),
                     Container(
@@ -732,7 +747,8 @@ class FourthScreen extends StatelessWidget {
                       highlightColor: Colors.green,
                       icon: Icon(Icons.person, size: 30, color: Colors.white),
                       onPressed: () {
-                        Navigator.popAndPushNamed(context, '/third'); // Navega a la Segunda Pantalla
+                        Navigator.popAndPushNamed(
+                            context, '/third'); // Navega a la Segunda Pantalla
 
                       },
                     ),
@@ -786,8 +802,229 @@ class FourthScreen extends StatelessWidget {
             ),
           ),
         ));
-
   }
 }
 
+class LandingScreen extends StatelessWidget {
+  int _currentStep = 0;
+
+
+  List<Widget> steps = [
+    // Paso 1
+    Card(
+      color: Colors.blue,
+      child: Center(
+        child:
+          Icon(Icons.home_outlined, size: 100, color: Colors.white),
+      ),
+    ),
+    // Paso 2
+    Card(
+      color: Colors.green,
+      child: Center(
+        child:
+          Icon(Icons.location_searching_rounded, size: 100, color: Colors.white),
+      ),
+    ),
+    // Paso 3
+    Card(
+      color: Colors.redAccent,
+      child: Center(
+        child:
+        Icon(Icons.food_bank, size: 100, color: Colors.white),
+
+      ),
+    ),
+    Card(
+      elevation: 0,
+      color: Colors.white,
+      child: Center(
+        child:
+        //StepperPage(),
+        Loggin()
+      ),
+    ),
+
+
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return
+      Scaffold(
+          bottomSheet:
+          BottomSheet(
+            builder: (BuildContext context) {
+                return Container(
+                  height: 82,
+                  color: Colors.black,
+                  child: Center(
+                    child: Text(
+                      "GETTING STARTED",
+                      style: TextStyle(
+                          letterSpacing: 2.0,
+                          color: Colors.white,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w900),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                );
+              },
+            onClosing: () {
+            Navigator.popAndPushNamed(context, '/first');
+          },
+
+          ),
+
+          extendBody: true,
+          body: Expanded(
+            child:
+          Center(
+            child:
+            CarouselSlider(
+              options: CarouselOptions(
+                aspectRatio: 1.0, // Relación de aspecto
+                enableInfiniteScroll: false, // Desplazamiento infinito
+                viewportFraction: 0.8, // Hace que el ancho ocupe todo el espacio
+                pageSnapping: true, // Hace que el scroll se detenga en cada paso
+                enlargeStrategy: CenterPageEnlargeStrategy.scale,
+                // Agrandar el paso
+                onScrolled: (value) {
+                  // Cuando se desplaza
+                      if (value == 3) {
+                        Navigator.popAndPushNamed(context, '/first');
+                      }
+                },
+                pauseAutoPlayOnTouch: true,
+                scrollPhysics: BouncingScrollPhysics(), // Física del scroll
+                autoPlay: true, // Establece en 'false' si deseas que no se mueva automáticamente
+                autoPlayInterval: Duration(seconds:1), // Intervalo entre cada paso
+                enlargeCenterPage: true, // Hace que el paso actual sea más grande
+                pauseAutoPlayInFiniteScroll: true,
+              ),
+              items: steps,
+            ),
+            )
+            ,)
+
+
+      );
+  }
+}
+class Loggin extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoButton(
+          child: Icon(Icons.arrow_forward_ios),
+          onPressed: () {
+            Navigator.popAndPushNamed(context, '/first');
+          },
+        );
+  }
+}
+/*
+class StepperPage extends StatefulWidget {
+  @override
+  _StepperPageState createState() => _StepperPageState();
+}
+
+class _StepperPageState extends State<StepperPage> {
+  int _currentStep = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return
+      Stepper(
+
+          onStepCancel: () {
+            if (_currentStep > 0) {
+              setState(() {
+                _currentStep--;
+              });
+            }
+          },
+        onStepContinue: () {
+          if (_currentStep >= 2) {
+            Navigator.popAndPushNamed(context, '/first');
+          } else {
+            setState(() {
+              _currentStep++;
+            });
+          }
+        },
+
+          elevation:0,
+
+        physics: ScrollPhysics(),
+        onStepTapped: (step) => setState(() => _currentStep = step)
+        , currentStep: _currentStep,
+        controlsBuilder: null,
+        steps: [
+
+        Step(
+          title: new Text('Email'),
+          content: Column(
+            children: <Widget>[
+              TextFormField(
+                decoration:
+                InputDecoration(
+                    border: OutlineInputBorder(borderSide: BorderSide(color:Colors.black)),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color:Colors.black))),
+              ),
+            ],
+          ),
+        ),
+        Step(
+          title: new Text('Password'),
+          content: Column(
+            children: <Widget>[
+              TextFormField(
+                decoration:
+                InputDecoration(
+                    border: OutlineInputBorder(borderSide: BorderSide(color:Colors.black)),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color:Colors.black))),
+              ),
+
+            ],
+          ),
+        ),
+        Step(
+
+            state: StepState.complete,
+          title: new Text('Verify'),
+          content: Column(
+            children: <Widget>[
+              Container(
+                  padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child:
+                Column(
+                  children: [
+                    Icon(Icons.email_outlined, size: 40, color: Colors.black,),
+                    Text("CHECK YOUR EMAIL",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            letterSpacing: 2.0,
+                            color: Colors.black,
+
+                            fontSize: 20,
+                            fontWeight: FontWeight.w200)),
+                  ],
+                )
+              )
+
+
+            ],
+          ),
+        ),
+      ],);
+  }
+} // Move the initialization to the constructor body
+
+*/
 
