@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -44,40 +46,79 @@ class MyApp extends StatelessWidget {
       // Deshabilitar la cuadrícula de Material
       showPerformanceOverlay: false,
       // Deshabilitar el rendimiento de la superposición
-      home: firstScreen(),
+      initialRoute: '/first',
+      routes: {
+        '/first': (context) => FirstScreen(),
+        '/second': (context) => SecondScreen(),
+        '/third': (context) => ThirdScreen(),
+        '/fourth': (context) => FourthScreen(),
+      },
+      navigatorKey: null,
     );
   }
 
+
+}
+class FirstScreen extends StatelessWidget{
   @override
-  Widget firstScreen() {
+  Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
       bottomNavigationBar: BottomAppBar(
           shape: CircularNotchedRectangle(),
           notchMargin: 12,
-          elevation: 100,
+          elevation: 10,
           shadowColor: Colors.black,
-          color: Colors.white,
+          color: Colors.black,
           clipBehavior: Clip.antiAliasWithSaveLayer,
-          surfaceTintColor: Colors.white,
-          height: 72,
+          surfaceTintColor: Colors.transparent,
+          height: 82,
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   IconButton(
-                    icon: Icon(Icons.home, size: 30, color: Colors.black),
+                    highlightColor: Colors.cyan,
+                    icon: Icon(Icons.home, size: 30, color: Colors.white),
                     onPressed: () {
-                      1;
+1;
                     },
                   ),
-
-                  SizedBox(width: 58), // Espacio vacío para el ícono central
                   IconButton(
-                    icon: Icon(Icons.person, size: 30, color: Colors.black),
+                    highlightColor: Colors.purple,
+                    icon: Icon(Icons.location_searching_rounded,
+                        size: 30, color: Colors.white),
                     onPressed: () {
-                      2;
+                      Navigator.pushNamed(context, '/second'); // Navega a la Segunda Pantalla
+                    },
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 39),
+                    width: 98,
+                    child: Text(
+                      "COOKBOOK",
+                      style: TextStyle(
+                          letterSpacing: 2.0,
+                          color: Colors.white,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w900),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  // Espacio vacío para el ícono central
+                  IconButton(
+                    highlightColor: Colors.green,
+                    icon: Icon(Icons.person, size: 30, color: Colors.white),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/third'); // Navega a la Segunda Pantalla
+                    },
+                  ),
+                  IconButton(
+                    highlightColor: Colors.orange,
+                    icon: Icon(Icons.settings, size: 30, color: Colors.white),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/fourth'); // Navega a la Segunda Pantalla
                     },
                   ),
                 ],
@@ -103,54 +144,43 @@ class MyApp extends StatelessWidget {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
+            automaticallyImplyLeading: false,
             clipBehavior: Clip.none,
-              forceMaterialTransparency: true,
-              title:
-              GestureDetector(
-                onTap: () {
-
-                },
-
-                child: Container(
-                  width: 200,
-                  padding: EdgeInsets.all(7),
-                  decoration:
-                  BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(10),
-
-                  ),
-
-
-                  child:
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.search,
+            forceMaterialTransparency: true,
+            title: GestureDetector(
+              onTap: () {},
+              child: Container(
+                width: 200,
+                padding: EdgeInsets.all(7),
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.search,
+                      color: Colors.white,
+                      size: 25,
+                    ),
+                    Container(
+                      width: 10,
+                    ),
+                    Text(
+                      'Buscar',
+                      style: TextStyle(
                         color: Colors.white,
-                        size: 25,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
                       ),
-                      Container(
-                        width: 10,),
-                      Text(
-                        'Buscar',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w400,
-
-                        ),
-                      ),
-
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
+            ),
 
-            actions: [
-
-            ],
+            actions: [],
             surfaceTintColor: Colors.transparent,
             foregroundColor: Colors.blueAccent,
             floating: true,
@@ -158,7 +188,7 @@ class MyApp extends StatelessWidget {
             pinned: false,
             // Establece como false para que la AppBar se oculte completamente al desplazarse hacia abajo
             snap:
-                true, // Establece como true para que la AppBar vuelva a aparecer al desplazarse hacia arriba
+            true, // Establece como true para que la AppBar vuelva a aparecer al desplazarse hacia arriba
           ),
           SliverList(
             delegate: SliverChildListDelegate(
@@ -166,6 +196,7 @@ class MyApp extends StatelessWidget {
                 Container(
                   height: 30,
                 ),
+                historias(),
                 dateofPost(),
                 postwid(),
                 dateofPost(),
@@ -185,47 +216,50 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget postwid() {
-    return Expanded(
-      flex: 1,
-      child: Container(
-        clipBehavior: Clip.antiAlias,
-        margin: EdgeInsets.all(25),
-        height: 500,
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.white, width: 1.5),
-          borderRadius: BorderRadius.circular(13),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(1),
-              spreadRadius: 5,
-              blurRadius: 34,
-              offset: const Offset(10, 10), // changes position of shadow
-            ),
-            BoxShadow(
-              color: Colors.white.withOpacity(1),
-              spreadRadius: 10,
-              blurRadius: 30,
-              offset: const Offset(-10, -10), // changes position of shadow
-            ),
-          ],
-          gradient: LinearGradient(
-              colors: [Colors.cyanAccent, Colors.orangeAccent],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              transform: GradientRotation(1)),
-        ),
-        child: Flex(
-          direction: Axis.vertical,
-          children: [
-            Expanded(
-              flex: 7,
-              child: Container(),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
-                  foregroundDecoration: BoxDecoration(
-                    /*
+    return Container(
+      clipBehavior: Clip.antiAlias,
+      margin: EdgeInsets.all(25),
+      constraints: BoxConstraints(
+        minHeight: 500,
+        minWidth: 500,
+      ),
+      height: 500,
+      width: 30,
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.white, width: 1.5),
+        borderRadius: BorderRadius.circular(13),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(1),
+            spreadRadius: 5,
+            blurRadius: 34,
+            offset: const Offset(10, 10), // changes position of shadow
+          ),
+          BoxShadow(
+            color: Colors.white.withOpacity(1),
+            spreadRadius: 10,
+            blurRadius: 30,
+            offset: const Offset(-10, -10), // changes position of shadow
+          ),
+        ],
+        gradient: LinearGradient(
+            colors: [Colors.cyanAccent, Colors.orangeAccent],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            transform: GradientRotation(1)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            flex: 7,
+            child: Container(),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(
+                foregroundDecoration: BoxDecoration(
+                  /*
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.1),
@@ -244,85 +278,84 @@ class MyApp extends StatelessWidget {
 
                     ],
                     */
-                    borderRadius: BorderRadius.vertical(
-                        bottom: Radius.circular(13), top: Radius.circular(0)),
-                    border: Border.all(
-                        color: Colors.white, width: 1, strokeAlign: 1.5),
-                  ),
-                  color: Colors.white,
-                  child: Flex(
-                    direction: Axis.horizontal,
-                    children: [
-                      Expanded(
-                        flex: 4,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  width: 10,
-                                ),
-                                Icon(
-                                  Icons.account_circle,
-                                  size: 15,
-                                ),
-                                Container(
-                                  width: 5,
-                                ),
-                                Text("Daniel Arribas"),
-                                Spacer(
-                                  flex: 10,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  width: 10,
-                                ),
-                                Text("Tortilla de patatas ".toUpperCase(),
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold)),
-                              ],
-                            ),
-                          ],
+                  borderRadius: BorderRadius.vertical(
+                      bottom: Radius.circular(13), top: Radius.circular(0)),
+                  border: Border.all(
+                      color: Colors.white, width: 1, strokeAlign: 1.5),
+                ),
+                color: Colors.white,
+                child: Flex(
+                  direction: Axis.horizontal,
+                  children: [
+                    Expanded(
+                      flex: 4,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                width: 10,
+                              ),
+                              Icon(
+                                Icons.account_circle,
+                                size: 15,
+                              ),
+                              Container(
+                                width: 5,
+                              ),
+                              Text("Daniel Arribas"),
+                              Spacer(
+                                flex: 10,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                width: 10,
+                              ),
+                              Text("Tortilla de patatas ".toUpperCase(),
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold)),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Row(children: [
+                        Text("24K",
+                            style:
+                            TextStyle(color: Colors.black, fontSize: 12)),
+                        Icon(
+                          Icons.message,
+                          color: Colors.black,
+                          size: 18,
                         ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Row(children: [
-                          Text("24K",
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 12)),
-                          Icon(
-                            Icons.message,
-                            color: Colors.black,
-                            size: 18,
-                          ),
-                          Spacer(
-                            flex: 1,
-                          ),
-                          Text("24K",
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 12)),
-                          Icon(
-                            Icons.favorite,
-                            color: Colors.black,
-                            size: 18,
-                          ),
-                          Spacer(
-                            flex: 1,
-                          ),
-                        ]),
-                      ),
-                    ],
-                  )),
-            )
-          ],
-        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                        Text("24K",
+                            style:
+                            TextStyle(color: Colors.black, fontSize: 12)),
+                        Icon(
+                          Icons.favorite,
+                          color: Colors.black,
+                          size: 18,
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                      ]),
+                    ),
+                  ],
+                )),
+          )
+        ],
       ),
     );
   }
@@ -339,4 +372,422 @@ class MyApp extends StatelessWidget {
       ),
     ]);
   }
+
+  @override
+  Widget historias() {
+    var iconos = [
+      Icon(
+        Icons.cookie,
+        color: Colors.white,
+        size: 40,
+      ),
+      Icon(
+        Icons.cake,
+        color: Colors.white,
+        size: 40,
+      ),
+      Icon(
+        Icons.fastfood,
+        color: Colors.white,
+        size: 34,
+      ),
+      Icon(
+        Icons.biotech,
+        color: Colors.white,
+        size: 40,
+      ),
+      Icon(
+        Icons.spoke_outlined,
+        color: Colors.white,
+        size: 40,
+      ),
+      Icon(
+        Icons.food_bank,
+        color: Colors.white,
+        size: 40,
+      ),
+      Icon(
+        Icons.person_2_rounded,
+        color: Colors.white,
+        size: 40,
+      ),
+    ];
+    return Container(
+      height: 70,
+      child: ListView(
+          physics: BouncingScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          // Configuramos el scroll horizontal
+
+          children: [
+            Container(
+              width: 20,
+            ),
+            for (int i = 0; i < iconos.length; i++)
+              Container(
+                margin: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  color: Colors.black,
+                  gradient: LinearGradient(
+                    colors: [Colors.cyanAccent, Colors.greenAccent],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter, // Punto final del degradado
+                  ),
+                ),
+                width: 60,
+                height: 60,
+                child: Center(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        border: Border.all(
+                          color: Colors.blue,
+                          width: 1,
+                        ),
+                        color: Colors.black,
+                      ),
+                      width: 55,
+                      height: 55,
+                      child: iconos[i],
+                    )),
+              ),
+          ]),
+    );
+  }
+
 }
+class SecondScreen extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        extendBody: true,
+        bottomNavigationBar: BottomAppBar(
+            shape: CircularNotchedRectangle(),
+            notchMargin: 12,
+            elevation: 10,
+            shadowColor: Colors.black,
+            color: Colors.black,
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            surfaceTintColor: Colors.transparent,
+            height: 82,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    IconButton(
+                      highlightColor: Colors.cyan,
+                      icon: Icon(Icons.home, size: 30, color: Colors.white),
+                      onPressed: () {
+                        Navigator.popAndPushNamed(context, '/first'); // Navega a la Segunda Pantalla
+                      },
+                    ),
+                    IconButton(
+                      highlightColor: Colors.purple,
+                      icon: Icon(Icons.location_searching_rounded,
+                          size: 30, color: Colors.white),
+                      onPressed: () {
+1;
+                      },
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 39),
+                      width: 98,
+                      child: Text(
+                        "COOKBOOK",
+                        style: TextStyle(
+                            letterSpacing: 2.0,
+                            color: Colors.white,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w900),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    // Espacio vacío para el ícono central
+                    IconButton(
+                      highlightColor: Colors.green,
+                      icon: Icon(Icons.person, size: 30, color: Colors.white),
+                      onPressed: () {
+                        Navigator.popAndPushNamed(context, '/third'); // Navega a la Segunda Pantalla
+
+                      },
+                    ),
+                    IconButton(
+                      highlightColor: Colors.orange,
+                      icon: Icon(Icons.settings, size: 30, color: Colors.white),
+                      onPressed: () {
+                        Navigator.popAndPushNamed(context, '/fourth'); // Navega a la Segunda Pantalla
+
+                      },
+                    ),
+                  ],
+                ),
+                const Spacer(
+                  flex: 1,
+                ),
+              ],
+            )),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          highlightElevation: 0,
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+            size: 40,
+          ),
+          shape: const StadiumBorder(),
+          elevation: 100,
+          backgroundColor: Colors.black,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        body: Center(
+          child: Expanded(
+            child: Container(
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.search, size: 100, color: Colors.black),
+                  Text("DISCOVER",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold)),
+                  Text("NEW RECIPES",
+                      style: TextStyle(
+                          letterSpacing: 8.0,
+                          color: Colors.black,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold)),
+                ],
+              ),
+            ),
+          ),
+        ));
+
+  }
+}
+class ThirdScreen extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        extendBody: true,
+        bottomNavigationBar: BottomAppBar(
+            shape: CircularNotchedRectangle(),
+            notchMargin: 12,
+            elevation: 10,
+            shadowColor: Colors.black,
+            color: Colors.black,
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            surfaceTintColor: Colors.transparent,
+            height: 82,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    IconButton(
+                      highlightColor: Colors.cyan,
+                      icon: Icon(Icons.home, size: 30, color: Colors.white),
+                      onPressed: () {
+                        Navigator.popAndPushNamed(context, '/first'); // Navega a la Segunda Pantalla
+                      },
+                    ),
+                    IconButton(
+                      highlightColor: Colors.purple,
+                      icon: Icon(Icons.location_searching_rounded,
+                          size: 30, color: Colors.white),
+                      onPressed: () {
+                        Navigator.popAndPushNamed(context, '/second'); // Navega a la Segunda Pantalla
+
+                      },
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 39),
+                      width: 98,
+                      child: Text(
+                        "COOKBOOK",
+                        style: TextStyle(
+                            letterSpacing: 2.0,
+                            color: Colors.white,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w900),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    // Espacio vacío para el ícono central
+                    IconButton(
+                      highlightColor: Colors.green,
+                      icon: Icon(Icons.person, size: 30, color: Colors.white),
+                      onPressed: () {
+                        2;
+                      },
+                    ),
+                    IconButton(
+                      highlightColor: Colors.orange,
+                      icon: Icon(Icons.settings, size: 30, color: Colors.white),
+                      onPressed: () {
+                        Navigator.popAndPushNamed(context, '/fourth'); // Navega a la Segunda Pantalla
+
+                      },
+                    ),
+                  ],
+                ),
+                const Spacer(
+                  flex: 1,
+                ),
+              ],
+            )),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          highlightElevation: 0,
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+            size: 40,
+          ),
+          shape: const StadiumBorder(),
+          elevation: 100,
+          backgroundColor: Colors.black,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        body: Center(
+          child: Expanded(
+            child: Container(
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.person, size: 100, color: Colors.black),
+                  Text("USER",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold)),
+                  Text("WHERE YOU ARE",
+                      style: TextStyle(
+                          letterSpacing: 8.0,
+                          color: Colors.black,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold)),
+                ],
+              ),
+            ),
+          ),
+        ));
+
+  }
+}
+class FourthScreen extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        extendBody: true,
+        bottomNavigationBar: BottomAppBar(
+            shape: CircularNotchedRectangle(),
+            notchMargin: 12,
+            elevation: 10,
+            shadowColor: Colors.black,
+            color: Colors.black,
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            surfaceTintColor: Colors.transparent,
+            height: 82,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    IconButton(
+                      highlightColor: Colors.cyan,
+                      icon: Icon(Icons.home, size: 30, color: Colors.white),
+                      onPressed: () {
+                        Navigator.popAndPushNamed(context, '/first'); // Navega a la Segunda Pantalla
+                      },
+                    ),
+                    IconButton(
+                      highlightColor: Colors.purple,
+                      icon: Icon(Icons.location_searching_rounded,
+                          size: 30, color: Colors.white),
+                      onPressed: () {
+                        Navigator.popAndPushNamed(context, '/second'); // Navega a la Segunda Pantalla
+                      },
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 39),
+                      width: 98,
+                      child: Text(
+                        "COOKBOOK",
+                        style: TextStyle(
+                            letterSpacing: 2.0,
+                            color: Colors.white,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w900),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    // Espacio vacío para el ícono central
+                    IconButton(
+                      highlightColor: Colors.green,
+                      icon: Icon(Icons.person, size: 30, color: Colors.white),
+                      onPressed: () {
+                        Navigator.popAndPushNamed(context, '/third'); // Navega a la Segunda Pantalla
+
+                      },
+                    ),
+                    IconButton(
+                      highlightColor: Colors.orange,
+                      icon: Icon(Icons.settings, size: 30, color: Colors.white),
+                      onPressed: () {
+                        2;
+                      },
+                    ),
+                  ],
+                ),
+                const Spacer(
+                  flex: 1,
+                ),
+              ],
+            )),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          highlightElevation: 0,
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+            size: 40,
+          ),
+          shape: const StadiumBorder(),
+          elevation: 100,
+          backgroundColor: Colors.black,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        body: Center(
+          child: Expanded(
+            child: Container(
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.settings, size: 100, color: Colors.black),
+                  Text("SETTINGS",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold)),
+                  Text("ALL THE PREFERENCES",
+                      style: TextStyle(
+                          letterSpacing: 8.0,
+                          color: Colors.black,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold)),
+                ],
+              ),
+            ),
+          ),
+        ));
+
+  }
+}
+
+
